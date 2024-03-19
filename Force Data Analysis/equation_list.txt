@@ -1,0 +1,22 @@
+Change verything yellow 
+Trying to find Impulse of laser ablation, impulse of first half of sine wave
+
+
+C4: =AVERAGE(C11:C1011)+0.00004				=AVERAGE(C11:C1011)+0.00004
+C5: End Bas.						=AVERAGE(C13010:C14010)
+C6: Slope						=(C5-C4)/13000
+C7: Intrcpt.						=C4-C6*500
+
+D2: RMS here:						=SQRT(SUMSQ(D141:D4011))/SQRT(4011-141)
+D11-D14010: F[N] (force in newtons baseline corrected)	=(C11-($C$7+B11*$C$6))/0.11241           C(11+n) for every additional line
+
+E11-E14010: F[N] (Moving Mean)					
+
+G1: RMS noise level (of 1st 4000 pts)			=SQRT(SUMSQ(E141:E4011))/SQRT(4011-141)
+G2: Pre-4000us min					=MIN(E11:E4011)
+G3: Pre-4000us max					=MAX(E11:E4011)
+G14: Find integral under small region of sine (impulse) =SUMIFS(E11:E14010,A11:A14010,">="&G9,A11:A14010,"<="&G10)*(C3/1000)    In micro newton seconds
+G15: Find integral of area under entire force line	=SUMIFS(E11:E14010,A11:A14010,">="&G9,A11:A14010,"<="&G10)*(C3/1000)
+
+
+
